@@ -1,0 +1,37 @@
+@import '@fontsource-variable/sora';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/noto-sans-kannada';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-white font-sans text-navy-900 antialiased; text-rendering: optimizeLegibility; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  ::selection { @apply bg-water-500 text-white; }
+  :focus-visible { @apply outline outline-2 outline-offset-2 outline-water-500; }
+  img { @apply select-none; }
+
+  /* Kannada script: looser spacing/line-height, no negative tracking, so conjuncts never collide */
+  html[lang='kn'] body { line-height: 1.75; }
+  html[lang='kn'] :is(h1, h2, h3, h4) { letter-spacing: 0; line-height: 1.45; }
+  html[lang='kn'] .eyebrow { letter-spacing: .05em; text-transform: none; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
+  .section-y { @apply py-20 sm:py-28; }
+  .eyebrow { @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[.22em] text-water-600; }
+  .eyebrow::before { content: ''; @apply h-px w-8 bg-current; }
+  .field { @apply w-full rounded-xl border border-navy-900/15 bg-white px-4 py-3 text-[15px] text-navy-900 shadow-sm transition placeholder:text-navy-900/40 focus:border-water-500 focus:outline-none focus:ring-4 focus:ring-water-500/15; }
+  .field[aria-invalid='true'] { @apply border-red-500 focus:border-red-500 focus:ring-red-500/15; }
+  /* depth-gauge ticks used as a decorative motif */
+  .gauge { background: repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
